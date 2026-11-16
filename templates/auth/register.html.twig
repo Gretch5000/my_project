@@ -1,0 +1,64 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Create your account – The Hitch{% endblock %}
+{% block stage %}register{% endblock %}
+
+{% block header_right %}
+    <span class="hint">Already have an account?</span>
+    <a class="ghostbtn" href="{{ path('app_login') }}">Sign In</a>
+{% endblock %}
+
+{% block content %}
+<section class="intro">
+    <span class="pill">Civic low-carbon mobility network</span>
+    <h1>Join The Hitch</h1>
+    <p class="lead">Share journeys, transport parcels, and cut your carbon footprint across France.</p>
+</section>
+
+<section class="card card--register">
+    {% include 'auth/_social.html.twig' with {label: 'Recommended by The Hitch'} %}
+
+    <div class="or"><span>or register via standard email form</span></div>
+
+    {% for e in errors %}<div class="alert" role="alert">{{ e }}</div>{% endfor %}
+
+    <form method="post" action="{{ path('app_register') }}">
+        <div class="two">
+            <div class="field"><label for="first">First name</label><input id="first" name="firstName" autocomplete="given-name" required placeholder="e.g. Camille"></div>
+            <div class="field"><label for="last">Last name</label><input id="last" name="lastName" autocomplete="family-name" required placeholder="e.g. Laurent"></div>
+        </div>
+        <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="camille.laurent@example.fr"></div>
+        <div class="field">
+            <div class="row"><label for="phone">Mobile phone number</label><span class="small small--muted">SMS code verification required</span></div>
+            <div class="phone"><span>+33</span><input id="phone" name="phone" type="tel" autocomplete="tel-national" placeholder="6 12 34 56 78"></div>
+        </div>
+        <div class="field">
+            <label for="pw">Create password</label>
+            <div class="pw">
+                <input id="pw" name="plainPassword" type="password" autocomplete="new-password" minlength="8" required>
+                <button type="button" data-toggle-pw="pw" aria-label="Show password">👁</button>
+            </div>
+            <ul class="rules" id="rules">
+                <li data-rule="len">8+ characters</li><li data-rule="num">At least 1 number</li><li data-rule="sym">1 special symbol (!@#$%)</li>
+            </ul>
+        </div>
+        <label class="check"><input type="checkbox" name="agreeTerms" required> <span>I agree to the <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a>, and Transport Charter (100% French metropolitan trips, no unaccompanied minors, no unauthorized animals).</span></label>
+        <label class="check"><input type="checkbox" name="notifications"> <span>Receive notifications about route matches and carbon offset milestones.</span></label>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+        <button class="btn" type="submit">Create My Hitch Account →</button>
+        <p class="ssl">Protected by French cryptographic standard SSL 256-bit encryption.</p>
+    </form>
+</section>
+
+<script>
+(function () {
+    var pw = document.getElementById('pw');
+    var tests = {len: /.{8,}/, num: /\d/, sym: /[^A-Za-z0-9]/};
+    pw.addEventListener('input', function () {
+        document.querySelectorAll('#rules li').forEach(function (li) {
+            li.classList.toggle('ok', tests[li.dataset.rule].test(pw.value));
+        });
+    });
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Find a {{ type == 'parcel' ? 'parcel route' : 'ride' }} – The Hitch{% endblock %}
+
+{% block header_right %}
+    <a class="back" href="{{ path('home') }}">← Back to Home</a>
+{% endblock %}
+
+{% block content %}
+<section class="card card--login">
+    <span class="pill">Coming soon</span>
+    <h1>Hi {{ app.user.firstName }}!</h1>
+    <p class="lead">The {{ type == 'parcel' ? 'parcel route' : 'ride' }} search is the next page to build.</p>
+    <a class="btn btn--link" href="{{ path('home') }}">Back to Home</a>
+</section>
+{% endblock %}

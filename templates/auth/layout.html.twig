@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/auth.css">
+{% endblock %}
+
+{% block body %}
+<header class="bar">
+    <div class="wrap">
+        <a class="logo" href="{{ path('home') }}"><i>{% include 'auth/_logo.svg.twig' %}</i>The Hitch</a>
+        <div class="bar-right">{% block header_right %}{% endblock %}</div>
+    </div>
+</header>
+
+<main class="stage stage--{% block stage %}login{% endblock %}">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="site">
+    <div class="wrap">
+        <div class="top">
+            <span class="logo logo--soft"><i>{% include 'auth/_logo.svg.twig' %}</i>The Hitch</span>
+            <div class="links"><a href="#">Legal Notice</a><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">FranceConnect Verification</a><a href="#">CO₂ Impact Methodology</a><a href="#">Safety &amp; Trust</a></div>
+        </div>
+        <div class="bot"><span>© 2025 The Hitch Eco-Mobility. Verified sustainable carpool &amp; package transit.</span><b>● Official French Mobility Partner</b></div>
+    </div>
+</footer>
+
+<script>
+document.querySelectorAll('[data-toggle-pw]').forEach(function (b) {
+    b.addEventListener('click', function () {
+        var i = document.getElementById(b.dataset.togglePw);
+        i.type = i.type === 'password' ? 'text' : 'password';
+        b.setAttribute('aria-pressed', i.type === 'text');
+    });
+});
+</script>
+{% endblock %}

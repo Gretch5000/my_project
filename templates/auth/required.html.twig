@@ -1,0 +1,18 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Sign in to continue – The Hitch{% endblock %}
+{% block stage %}login{% endblock %}
+
+{% block header_right %}
+    <a class="back" href="{{ path('home') }}">← Back to Home</a>
+{% endblock %}
+
+{% block content %}
+<section class="card card--login">
+    <span class="pill">Account required</span>
+    <h1>Create an account or sign in to continue</h1>
+    <p class="lead">To search rides and parcel routes you need a free Hitch account. It only takes a minute.</p>
+    <a class="btn btn--link" href="{{ path('app_register') }}">Create an account</a>
+    <a class="btn btn--link btn--alt" href="{{ path('app_login') }}">I already have an account – Sign in</a>
+</section>
+{% endblock %}

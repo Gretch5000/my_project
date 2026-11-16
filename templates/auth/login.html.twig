@@ -1,0 +1,46 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Sign in – The Hitch{% endblock %}
+{% block stage %}login{% endblock %}
+
+{% block header_right %}
+    <a class="back" href="{{ path('home') }}">← Back to Home</a>
+{% endblock %}
+
+{% block content %}
+<section class="card card--login">
+    <span class="pill">Secure Authentication Portal</span>
+    <h1>Welcome back to The Hitch</h1>
+    <p class="lead">Log in to access your booked journeys, parcels, and FranceConnect verified profile.</p>
+
+    {% include 'auth/_social.html.twig' with {label: 'Official civic sign-in'} %}
+
+    <div class="or"><span>or sign in with email</span></div>
+
+    {% if error %}
+    <div class="alert" role="alert">Invalid email or password.</div>
+    {% endif %}
+
+    <form method="post" action="{{ path('app_login') }}">
+        <div class="field">
+            <label for="username">Email address</label>
+            <input id="username" name="_username" type="email" value="{{ last_username }}" autocomplete="email" required placeholder="alexandre.martin@example.com">
+        </div>
+        <div class="field">
+            <div class="row"><label for="password">Password</label><a class="small" href="#">Forgot password?</a></div>
+            <div class="pw">
+                <input id="password" name="_password" type="password" autocomplete="current-password" required>
+                <button type="button" data-toggle-pw="password" aria-label="Show password">👁</button>
+            </div>
+        </div>
+        <div class="row row--check">
+            <label class="check"><input type="checkbox" name="_remember_me" checked> Remember this device for 30 days</label>
+            <span class="tag">Protected session</span>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button class="btn" type="submit">Sign In</button>
+    </form>
+
+    <p class="switch">Don’t have an account yet? <a href="{{ path('app_register') }}">Create an account / Sign up →</a></p>
+</section>
+{% endblock %}
