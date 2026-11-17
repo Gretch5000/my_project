@@ -1,3 +1,8 @@
+###> Environment Configuration ###
+/.env
+/.env.*
+!/.env.example
+###< Environment Configuration ###
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -8,3 +13,12 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> IDE & OS Files ###
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+###< IDE & OS Files ###
